@@ -4,9 +4,9 @@ title: コンテナで実行しているコードをデバッグする
 sidebar_label: コンテナで実行しているコードをデバッグする
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/remote-debugging です
-
 この記事では、Visual Studioを使って、ローカルのDockerコンテナでコードを実行しているときにステップスルーする方法を説明します。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/remote-debugging です
 
 始める前に
 

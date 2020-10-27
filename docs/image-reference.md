@@ -4,9 +4,9 @@ title: Sitecoreイメージリファレンス
 sidebar_label: Sitecoreイメージリファレンス
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/image-reference です
-
 このページでは、Sitecore Container Registry (SCR)、scr.sitecore.comで利用可能なイメージの詳細情報と、カスタムソリューションでの使用方法について説明します。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/image-reference です
 
 ## Sitecore Container Registry をブラウズする
 

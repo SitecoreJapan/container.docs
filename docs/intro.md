@@ -4,9 +4,9 @@ title: 概要
 sidebar_label: 概要
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/intro です
-
 コンテナとDockerの概念を徹底的にカバーしている優れたリソースはすでに多数存在します。さらなる読み物の下に推奨事項を見つけることができます。そのため、このドキュメントでは、このトピックの概要を簡単に説明するだけです。さらに重要なのは、コンテナ技術がSitecore開発にどのようにフィットするかを見ていくことです。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/intro です
 
 ## コンテナとDockerの紹介
 

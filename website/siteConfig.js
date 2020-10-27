@@ -15,7 +15,7 @@ const users = [
     // You will need to prepend the image path with your baseUrl
     // if it is not '/', like: '/test-site/img/image.jpg'.
     image: '/img/undraw_open_source.svg',
-    infoLink: 'https://www.facebook.com',
+    infoLink: 'https://www.sitecore.com',
     pinned: true,
   },
 ];
@@ -23,7 +23,7 @@ const users = [
 const siteConfig = {
   title: 'DevEx Containers Documentation', // Title for your website.
   tagline: 'Sitecore コンテナガイド',
-  url: 'https://sitecorecontainer.cmsdemo.jp', // Your website URL
+  url: 'https://containers.doc.sitecorejp.net/', // Your website URL
   baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
@@ -56,6 +56,7 @@ const siteConfig = {
     secondaryColor: '#402419',
   },
 
+  
   /* Custom fonts for website */
   /*
   fonts: {
@@ -90,6 +91,10 @@ const siteConfig = {
   ogImage: 'img/undraw_online.svg',
   twitterImage: 'img/undraw_tweetstorm.svg',
 
+  // Google Analytics
+
+  gaTrackingId: 'G-XP4B5RPFJM',
+  gaGtag: true,
   // For sites with a sizable amount of content, set collapsible to true.
   // Expand/collapse the links and subcategories under categories.
   // docsSideNavCollapsible: true,

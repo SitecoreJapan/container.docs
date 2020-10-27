@@ -4,9 +4,10 @@ title: 最初のSitecoreインスタンスの実行
 sidebar_label: 最初のSitecoreインスタンスの実行
 ---
 
+コンテナベースの Sitecore は、ローカルの開発環境で Sitecore インスタンスをセットアップする際のエクスペリエンスを大幅に向上させます。このガイドでは、Sitecore Experience Platform - Single (XP0) インスタンスを最小限の設定で素早く立ち上げる方法を紹介します。
+
 > **注意:** このページの原文は https://containers.doc.sitecore.com/docs/run-sitecore です
 
-コンテナベースの Sitecore は、ローカルの開発環境で Sitecore インスタンスをセットアップする際のエクスペリエンスを大幅に向上させます。このガイドでは、Sitecore Experience Platform - Single (XP0) インスタンスを最小限の設定で素早く立ち上げる方法を紹介します。
 
 > このガイドでは、簡単にするためにSitecore Experience Platform - Single (XP0)の構成を使用していますが、どの構成でも同じアプローチで起動することができます。
 

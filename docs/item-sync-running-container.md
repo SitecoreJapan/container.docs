@@ -4,10 +4,9 @@ title: 実行中のコンテナとのアイテム同期
 sidebar_label: 実行中のコンテナとのアイテム同期
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/item-sync-running-container です
-
-
 このガイドでは、コンテナで稼働しているローカルのSitecore環境から、シリアル化されたアイテムをプッシュしたり、プルしたりする方法を説明します。これは、使用している Sitecore アイテムシリアライズツールによって異なります。テスト環境や本番環境では、アイテムのパッケージングやデプロイは重要ですが、日々の開発では、他のSitecore開発環境と同じように、これらのツールを使用したいと思うでしょう。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/item-sync-running-container です
 
 このガイドでは、Sitecore アイテムのシリアライズと、Sitecore 開発とデプロイメントプロセスへの適用については、すでに熟知していることを前提としています。
 
