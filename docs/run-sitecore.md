@@ -341,6 +341,8 @@ b4279d4f6de7  scr.sitecore.com/platform/sitecore-id:10.0.0-ltsc2019             
 
 ポートを使用してSQL Serverに接続する場合は、構文が少し異なります。上記のようにコロンではなくカンマを使用する必要があります。SQL Server認証では、"sa" アカウントと `.env` ファイルで `SQL_SA_PASSWORD` に指定した値（init.ps1ではデフォルトで "Password12345"）を使用して接続できます。
 
+![SQL Server](/docs/SSMS-Connection.png "SQL Server")
+
 ## インスタンスを確認します。
 
 https://xp0cm.localhost を参照すると、Sitecore のデフォルトのウェブサイトが表示されるはずです。
