@@ -4,9 +4,9 @@ title: コンフィグ変換の適用
 sidebar_label: コンフィグ変換の適用
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/config-transforms です
-
 Sitecoreの実装では、Sitecoreのconfigパッチでは変更できない設定ファイルの修正が必要になることがよくあります。例えば、Web.config、ConnectionStrings.config、Domains.config、Layers.configなどです。このような場合は、[XDT変換ファイル](https://docs.microsoft.com/ja-jp/previous-versions/aspnet/dd465326(v=vs.110)) を使用します。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/config-transforms です
 
 このガイドでは、Sitecore Dockerイメージを構築する際に、これらのXDTベースのコンフィグトランスフォームをどのように適用するかを説明します。トランスフォームファイルは、[ソリューション内](#ソリューション変換) にある場合と、[特定のSitecoreロール用のDockerfileにローカルにある場合](#ロールの変換) があります。この例では、Sitecore Experience Management (XM1) インスタンスを使用しています。
 

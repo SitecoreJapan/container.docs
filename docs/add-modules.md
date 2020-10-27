@@ -4,9 +4,9 @@ title: Sitecoreモジュールの追加
 sidebar_label: Sitecoreモジュールの追加
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/add-modules です
-
 このガイドでは、Sitecoreモジュールの「アセットイメージ」を紹介し、カスタムSitecore Dockerイメージを構築する際に、これらを使用して追加のSitecoreモジュールをインクルードする方法を説明します。この例では、Sitecore Experience Platform - Single (XP0) インスタンスに [Sitecore PowerShell Extensions (SPE)](https://doc.sitecorepowershell.com/) モジュールと [Sitecore Experience Accelerator (SXA)](https://doc.sitecore.com/developers/sxa/100/sitecore-experience-accelerator/en/index-en.html) モジュールを追加しています。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/add-modules です
 
 ## 始める前に
 

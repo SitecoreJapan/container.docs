@@ -4,9 +4,9 @@ title: 実行中のコンテナへのファイル展開
 sidebar_label: 実行中のコンテナへのファイル展開
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/file-deployment です
-
 このガイドでは、Visual Studio からローカルで実行しているコンテナに直接ファイルをデプロイできるように Sitecore ソリューションを設定する方法を説明します。これは、カスタムSitecoreイメージを毎回再構築しなければならないのではなく、効率的なフィードバックループを確保するために、開発中に不可欠です。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/file-deployment です
 
 ここでは、その概要を簡単に説明します。
 

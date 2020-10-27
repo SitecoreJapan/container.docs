@@ -4,9 +4,9 @@ title: Sitecore モジュールリファレンス
 sidebar_label: Sitecore モジュールリファレンス
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/module-reference です
-
 このページは、Dockerの「アセットイメージ」として利用可能なSitecoreモジュールと、カスタムイメージを構築する際に各ロールに含める必要がある[Sitececore ランタイム Dockerfile](build-sitecore-images.md#sitecore-ランタイム-dockerfile)命令のリファレンスとして機能します。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/module-reference です
 
 Sitecoreモジュールイメージの詳細と、それらがどのように含まれているかについては、[Sitecore PowerShell Extensions (SPE)](#sitecore-powershell-extensions-spe) モジュールとSitecore Experience Accelerator (SXA)モジュールを含む [Sitecoreモジュールの追加](add-modules.md) ガイドを参照してください。
 

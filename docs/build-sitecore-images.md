@@ -4,9 +4,9 @@ title: カスタムSitecoreイメージを構築する
 sidebar_label: カスタムSitecoreイメージを構築する
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/build-sitecore-images です
-
 このガイドでは、ソリューションからのビルド出力を他のアセットと一緒に、ベースのSitecoreランタイムイメージにレイヤー化して、独自のカスタムSitecoreイメージを作成する方法について説明します。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/build-sitecore-images です
 
 ここでは、その概要を簡単に説明します。
 
