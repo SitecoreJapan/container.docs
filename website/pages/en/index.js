@@ -156,6 +156,20 @@ class Index extends React.Component {
       </Block>
     );
 
+    const ContentList = () => (
+      <Block background="light">
+        {[
+          {
+            content:
+              '[目次に移動する](/docs/intro)',
+            image: ``,
+            imageAlign: 'right',
+            title: 'はじめに',
+          },
+        ]}
+      </Block>
+    );
+
     const Showcase = () => {
       if ((siteConfig.users || []).length === 0) {
         return null;
@@ -190,7 +204,7 @@ class Index extends React.Component {
       <div>
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
-          <Features />
+          <ContentList />
         </div>
       </div>
     );
