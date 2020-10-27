@@ -4,10 +4,10 @@ title: Sitecore Dockerチートシート
 sidebar_label: Sitecore Dockerチートシート
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/cheat-sheet です
-
 Dockerの公式ドキュメントは素晴らしいものですが、最初は少し圧倒されるかもしれません。このページでは、ローカルの開発環境でSitecoreをDockerで管理する際に便利なコマンドをいくつか紹介します。
 ここでは、コマンドシェルとしてPowerShellを使用することを前提としています。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/cheat-sheet です
 
 一般的な
 利用可能なコマンドをすべてリストアップします。

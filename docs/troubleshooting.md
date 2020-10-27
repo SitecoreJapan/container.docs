@@ -4,9 +4,10 @@ title: トラブルシューティング
 sidebar_label: トラブルシューティング
 ---
 
+このページでは、Docker Desktop for WindowsとDockerベースのSitecore開発の問題をトラブルシューティングするためのリソースと手順をまとめています。
+
 > **注意:** このページの原文は https://containers.doc.sitecore.com/docs/troubleshooting です
 
-このページでは、Docker Desktop for WindowsとDockerベースのSitecore開発の問題をトラブルシューティングするためのリソースと手順をまとめています。
 
 ## リソース
 

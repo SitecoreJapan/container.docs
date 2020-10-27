@@ -4,10 +4,9 @@ title: アイテム展開
 sidebar_label: アイテム展開
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/item-deployment です
-
-
 このガイドでは、Docker上でのSitecoreアイテムパッケージとデプロイの自動化戦略について説明します。これは、使用しているSitecoreアイテムのシリアライズツールによって異なります。このガイドでは、Sitecore アイテムのシリアライズと、Sitecore 開発とデプロイのプロセスへの適用について、すでに熟知していることを前提としています。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/item-deployment です
 
 ## Sitecore CLI / Sitecoreコンテンツシリアライズ
 

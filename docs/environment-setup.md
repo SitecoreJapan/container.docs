@@ -4,9 +4,9 @@ title: 環境を整える
 sidebar_label: 環境を整える
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/environment-setup です
-
 本ドキュメントは、Docker Desktopを使用する **Windows 10** が動作する開発環境に適用されます。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/environment-setup です
 
 Docker Engine - Enterpriseを使用する **Windows Server** が動作するその他の環境（ビルドエージェントなど）については、[Dockerのドキュメント](https://hub.docker.com/editions/enterprise/docker-ee-server-windows) を参照してください。注意 Docker Composeは [別インストール](https://docs.docker.com/compose/install/) です。
 

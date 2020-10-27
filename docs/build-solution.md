@@ -4,9 +4,9 @@ title: 環境を整える
 sidebar_label: 環境を整える
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/build-solution です
-
 このガイドでは、DockerfileとDockerイメージのビルドプロセスと、それを使ってSitecoreソリューションをビルドする方法を紹介します。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/build-solution です
 
 ## 始める前に
 

@@ -4,10 +4,9 @@ title: Dockerfileのベストプラクティスとシナリオ
 sidebar_label: Dockerfileのベストプラクティスとシナリオ
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/dockerfile-best-practices です
-
-
 このページでは、独自のDockerfilesを書くためのベストプラクティスをリストアップし、DockerベースのSitecore開発中に遭遇する一般的なビルドシナリオをまとめています。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/dockerfile-best-practices です
 
 ベストプラクティス
 

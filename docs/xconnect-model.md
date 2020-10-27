@@ -4,9 +4,9 @@ title: カスタム xConnect モデルを含む
 sidebar_label: カスタム xConnect モデルを含む
 ---
 
-> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/xconnect-model です
-
 このガイドでは、Sitecore Experience Platform (XP) 実装用の Sitecore Docker イメージを構築する際に、カスタム xConnect モデルがどのように含まれているかを説明します。
+
+> **注意:** このページの原文は https://containers.doc.sitecore.com/docs/xconnect-model です
 
 ## 始める前に
 
