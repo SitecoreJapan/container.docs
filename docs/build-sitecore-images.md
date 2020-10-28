@@ -264,5 +264,5 @@ Sitecore のランタイムイメージがどのように作成されるかの�
 関連情報
 
 * [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
-* [Dockerfile on Windows](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-docker/manage-windows-dockerfile)
+* [Dockerfile on Windows](https://docs.microsoft.com/ja-jp/virtualization/windowscontainers/manage-docker/manage-windows-dockerfile)
 * [Dockerfile best practices and scenarios](dockerfile-best-practices.md)
