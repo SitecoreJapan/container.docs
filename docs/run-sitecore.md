@@ -30,7 +30,7 @@ sidebar_label: 最初のSitecoreインスタンスの実行
 
 PowerShell プロンプトを開き、get-started フォルダに移動し、内容を確認します。
 
-```command
+```shell
 cd C:\sitecoredocker-examples-getting-started
 ls
 ```
@@ -84,8 +84,8 @@ mssql:
 Sitecore インスタンスを開始する前に、少しだけ準備をしておく必要があります。このセクションでは、その手順を説明します。
 とはいえ、このリポジトリには、これらの準備作業を自動的に実行するスクリプト - init.ps1 スクリプト - も含まれています。PowerShellの管理者プロンプトから実行してください。
 
-```shell
-.init.ps1 -LicenseXmlPath C:\Licenselicense.xml
+```powershell
+.\init.ps1 -LicenseXmlPath C:\License\license.xml
 ```
 
 > このガイドを一度は自分で読んでみて、手順をよりよく理解することが有益です。
@@ -95,7 +95,7 @@ Sitecore インスタンスを開始する前に、少しだけ準備をして�
 このガイドでは、[SitecoreDockerTools](https://sitecore.myget.org/feed/sc-powershell/package/nuget/SitecoreDockerTools) PowerShellモジュールを利用します。SitecoreDockerToolsには、DockerベースのSitecore開発をサポートするための様々なヘルパーコマンドが含まれています。必須ではありませんが、これらのコマンドを使用することで、準備の手順を大幅に簡略化することができます。
 PowerShellから以下のコマンドを実行してインストールするか、[SitecoreDockerToolsのMyGetページ](https://sitecore.myget.org/feed/sc-powershell/package/nuget/SitecoreDockerTools) の指示に従ってください。
 
-```shell
+```powershell
 Register-PSRepository -Name "SitecoreGallery" -SourceLocation "https://sitecore.myget.org/F/sc-powershell/api/v2"
 Install-Module SitecoreDockerTools
 ```
@@ -104,7 +104,7 @@ Install-Module SitecoreDockerTools
 
 .env ファイルをよく見てみると、いくつかの未割り当ての値があることに気づくでしょう。
 
-```yml
+```
 COMPOSE_PROJECT_NAME=sitecore-xp0
 SITECORE_DOCKER_REGISTRY=scr.sitecore.com/platform/
 SITECORE_VERSION=10.0.0-ltsc2019
@@ -137,12 +137,11 @@ SitecoreDockerToolsモジュールを使用して、PowerShellでこれらを設
 
 #### Telerik暗号化キーの設定
 
-環境ファイルと同じフォルダ（例：C:\sitecoreDocker-examplesgetgetting-started）から、管理者として以下のPowerShellスクリプトを実行します。
+環境ファイルと同じフォルダ（例：C:\sitecore\docker-examples\getting-startedから、管理者として以下のPowerShellスクリプトを実行します。
 
-```shell
+```powershell
 Import-Module SitecoreDockerTools
-Set-DockerComposeEnvFileVariable "TELERIK_ENCRYPTION_KEY" -Value (Get-SitecoreRandomString 128)
-```
+Set-DockerComposeEnvFileVariable "TELERIK_ENCRYPTION_KEY" -Value (Get-SitecoreRandomString 128)```
 
 これはSitecoreDockerToolsモジュールをセッションにインポートし、2つのコマンドレットを利用して `TELERIK_ENCRYPTION_KEY` 変数を設定します。
 

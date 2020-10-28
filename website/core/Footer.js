@@ -29,7 +29,7 @@ class Footer extends React.Component {
               ローカルの開発とデバッグ
             </a>
             <a href={this.docUrl('dockerfile-best-practices')}>
-              リファレンス
+              ベストプラクティス
             </a> 
                     </div>
           <div>

@@ -23,7 +23,7 @@ Hyper-Vが有効になっていること。
 
 ### ハードウェアガイドライン
 
-ハードウェアはまず、Hyper-V自体を実行するための要件を満たす必要があります。互換性の確認方法を含む詳細については、Windows 10 Hyper-V システム要件を参照してください。要約すると、Hyper-Vには以下の要件が必要です。
+ハードウェアはまず、Hyper-V自体を実行するための要件を満たす必要があります。互換性の確認方法を含む詳細については、[Windows 10 Hyper-V システム要件](https://docs.microsoft.com/ja-jp/virtualization/hyper-v-on-windows/reference/hyper-v-requirements)を参照してください。要約すると、Hyper-Vには以下の要件が必要です。
 
 * Second-level address translation (SLAT)とハードウェア支援仮想化を備えた64ビットプロセッサ。
 * 少なくとも4GBのRAM（Sitecoreのガイドラインについては下記を参照）。
@@ -41,12 +41,12 @@ Hyper-Vが有効になっていること。
 
 ### Dockerデスクトップのインストール
 
-1. Docker Desktop for Windowsをダウンロードし、インストーラーを実行します。
-2. インストール時に、LinuxコンテナではなくWindowsコンテナを使用することを選択します。また、インストール後にWindowsコンテナに切り替えることもできます（下記参照）。
+1. [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)をダウンロードし、インストーラーを実行します。
+2. インストール時に、**LinuxコンテナではなくWindowsコンテナを使用すること**を選択します。また、インストール後にWindowsコンテナに切り替えることもできます（下記参照）。
 
-または、以下のコマンドでChocolateyを使ってインストールします。
+または、以下のコマンドで[Chocolatey](https://chocolatey.org/)を使ってインストールします。
 
-```shell
+```powershell
 choco install docker-desktop
 ```
 
@@ -54,7 +54,7 @@ choco install docker-desktop
 
 ### Dockerデスクトップを起動する
 
-Docker Desktopはインストールしても自動的に起動しません。まだ起動していない場合は、Docker Desktopを起動します。
+Docker Desktopはインストールしても自動的に起動しません。まだ起動していない場合は、[Docker Desktopを起動](https://docs.docker.com/docker-for-windows/install/#start-docker-desktop)します。
 
 ![Docker Desktopを起動する](/docs/Docker-Desktop-App.png "Docker Desktopを起動する")
 

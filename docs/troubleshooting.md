@@ -28,7 +28,7 @@ sidebar_label: トラブルシューティング
 
 ここにリストアップされているツールは、コンテナの可視性を高めてくれます。これらは必ずしもトラブルシューティングに特化したものではありませんが、ログ、リソース使用統計、コンテナ上のファイルシステムへのアクセスを向上させるのに役立ちます。
 
-* [Visual Studio Containers ウィンドウ](https://docs.microsoft.com/en-us/visualstudio/containers/view-and-diagnose-containers) - ログを含むコンテナ情報を表示し、ファイルシステムを参照します。
+* [Visual Studio Containers ウィンドウ](https://docs.microsoft.com/ja-jp/visualstudio/containers/view-and-diagnose-containers) - ログを含むコンテナ情報を表示し、ファイルシステムを参照します。
 * [Visual Studio Code Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) - コンテナ、イメージ、ネットワーク、ボリュームなどを表示して管理します。
 * [Portainer](https://www.portainer.io/) - ローカルを含む Docker 環境を管理するための人気のあるオープンソースのツールです。
 
@@ -68,7 +68,7 @@ Docker engine (daemon)のログは、`C:\Users\%USERNAME%\AppData\Local\Docker` 
 docker system prune
 ```
 
-詳細は[Sitecore Dockerのチートシート](cheat-sheet.md#cleanup) を参照してください。
+詳細は[Sitecore Dockerのチートシート](cheat-sheet.md#クリーンアップ) を参照してください。
 
 **5. PCを再起動する**
 

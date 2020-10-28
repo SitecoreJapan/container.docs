@@ -31,7 +31,7 @@ Sitecore 10でリリースされたSitecore CLIは、リモートのSitecoreイ�
 
 ### ソリューションビルドでの設定
 
-Sitecore TDSでは、Dockerビルドやクラウドビルドの際に[環境変数のライセンス](dockerfile-best-practices.md#building-with-team-development-for-sitecore)が必要になります。ソリューションビルドのDockerfileの中で、コードのコンパイルとビルドの段階（例ではビルダー）の開始時に、これらのARGを宣言してください。
+Sitecore TDSでは、Dockerビルドやクラウドビルドの際に[環境変数のライセンス](dockerfile-best-practices.md#team-development-for-sitecore-で構築)が必要になります。ソリューションビルドのDockerfileの中で、コードのコンパイルとビルドの段階（例ではビルダー）の開始時に、これらのARGを宣言してください。
 
 ```
 ARG TDS_Owner
