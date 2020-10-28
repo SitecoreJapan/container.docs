@@ -1,7 +1,7 @@
 ---
 id: build-solution
-title: 環境を整える
-sidebar_label: 環境を整える
+title: ソリューションのビルド
+sidebar_label: ソリューションのビルド
 ---
 
 このガイドでは、DockerfileとDockerイメージのビルドプロセスと、それを使ってSitecoreソリューションをビルドする方法を紹介します。
@@ -26,7 +26,7 @@ Dockerfileを書くことは、アプリケーションをコンテナ化する�
 
 ここでは、シンプルな（Sitecoreではない）ASP.NET MVCアプリの例を示します。
 
-```yml
+```ASP
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS build
 WORKDIR /app
 
@@ -49,7 +49,7 @@ Dockerfileは [Docker buildコマンド](https://docs.docker.com/engine/referenc
 
 オプションの [.dockerignore](https://docs.docker.com/engine/reference/builder/#dockerignore-file) を使用すると、ファイルやフォルダをビルドコンテキストから除外し、サイズを小さくしたり、COPYコマンドやADDコマンドで機密データをスキップしたりすることができます。
 
-> Dockerfiles の詳細については、Docker のドキュメントを参照してください。
+> Dockerfiles の詳細については、[Docker のドキュメント](https://docs.docker.com/engine/reference/builder/)を参照してください。
 
 ### コードのビルドはどこで行われるべきでしょうか？
 
@@ -76,7 +76,7 @@ Dockerfileは [Docker buildコマンド](https://docs.docker.com/engine/referenc
 
 これはまさにルートの `Dockerfile` の例にあるものです。
 
-> Dockerコミュニティでは、Dockerfile.buildという名前のビルド用Dockerfileをよく見かけます。
+> Dockerコミュニティでは、`Dockerfile.build`という名前のビルド用Dockerfileをよく見かけます。
 
 *custom-images* フォルダに移動して、ここにある `Dockerfile` を見てみてください (例: *C:\sitecore\docker-examples\custom-images\Dockerfile* )。
 
@@ -90,7 +90,7 @@ Dockerfileは [Docker buildコマンド](https://docs.docker.com/engine/referenc
 
 次に、NuGetのリストアに必要なアーティファクトだけを集めるための `prep` 段階を行います。これは.NETビルドでよく行われる最適化です。[Dockerfile のベストプラクティス - NuGet リストアの最適化](dockerfile-best-practices.md#nuget-リストアの最適化) を参照してください。
 
-```yml
+```
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS prep
 
 COPY *.sln nuget.config Directory.Build.targets Packages.props \nuget\
@@ -98,7 +98,7 @@ COPY src\ \temp\
 RUN Invoke-Expression 'robocopy C:\temp C:\nuget\src /s /ndl /njh /njs *.csproj *.scproj packages.config'
 ```
 
-新しいビルダーステージは、[.NET Framework SDKイメージ](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/) に基づいてコードのコンパイルとビルドプロセスを開始し、BUILD_CONFIGURATION ARGが宣言されます（これは [Docker Composeで設定](https://containers.doc.sitecore.com/docs/build-solution#configure-in-docker-compose) された "debug "か "release "のどちらかになります）。
+新しいビルダーステージは、[.NET Framework SDKイメージ](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/) に基づいてコードのコンパイルとビルドプロセスを開始し、BUILD_CONFIGURATION ARGが宣言されます（これは [Docker Composeで設定](#docker-composeで設定する) された "debug "か "release "のどちらかになります）。
 
 ```
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS builder

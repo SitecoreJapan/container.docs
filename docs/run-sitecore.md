@@ -24,7 +24,7 @@ sidebar_label: 最初のSitecoreインスタンスの実行
 
 ## Docker Examples リポジトリをクローンする
 
-まず、[Docker Examplesリポジトリ](https://github.com/Sitecore/docker-examples) をマシン上のどこかにクローンします。例えば、C:\sitecoredocker-examples (以下の手順では、このフォルダが使用されていると仮定しています)。
+まず、[Docker Examplesリポジトリ](https://github.com/Sitecore/docker-examples) をマシン上のどこかにクローンします。例えば、C:\sitecore\docker-examples\ (以下の手順では、このフォルダが使用されていると仮定しています)。
 
 このリポジトリには、Sitecore Containers DevEx ドキュメントのコンパニオンコードが含まれています。このガイドでは、get-started フォルダを使用します。
 
@@ -57,7 +57,7 @@ Sitecoreの場合、サービスは一般的にトポロジーを構成する個
 
 これは環境ファイルです。ここの値は、Composeファイルで参照される環境変数（例：`SITECORE_DOCKER_REGISTRY`）や、Composeの設定に使用される環境変数（例：`COMPOSE_PROJECT_NAME`）のデフォルト値を提供します。
 
-> 環境ファイルの詳細については、Dockerのドキュメントを参照してください。
+> 環境ファイルの詳細については、[Dockerのドキュメント](https://docs.docker.com/compose/env-file/)を参照してください。
 
 環境変数は、コンテナーに設定を渡すための好ましい仕組みです。これらがSitecoreコンテナでどのように使われているかは、`docker-compose.yml` ファイルで確認できます。例えば、mssqlサービスは、SQL Server SAパスワード（`SA_PASSWORD`）を設定するために環境変数を設定します。
 
@@ -75,14 +75,14 @@ mssql:
     - "14330:1433"
 ```
 
-値は変数置換(`${SQL_SA_PASSWORD}`)を使用して.envファイルから取得しています。
+値は変数置換(`${SQL_SA_PASSWORD}`)を使用して`.env`ファイルから取得しています。
 
 > Docker Composeでの環境変数の使用方法については、[Dockerのドキュメント](https://docs.docker.com/compose/environment-variables/) を参照してください。
 
 ## 準備するもの
 
 Sitecore インスタンスを開始する前に、少しだけ準備をしておく必要があります。このセクションでは、その手順を説明します。
-とはいえ、このリポジトリには、これらの準備作業を自動的に実行するスクリプト - init.ps1 スクリプト - も含まれています。PowerShellの管理者プロンプトから実行してください。
+とはいえ、このリポジトリには、これらの準備作業を自動的に実行するスクリプト - `init.ps1` スクリプト - も含まれています。PowerShellの管理者プロンプトから `-LicenseXmlPath` をSitecoreライセンスファイルの場所に置き換えて実行してください。
 
 ```powershell
 .\init.ps1 -LicenseXmlPath C:\License\license.xml
@@ -122,7 +122,7 @@ TRAEFIK_ISOLATION=hyperv
 ISOLATION=default
 ```
 
-> これらの変数のそれぞれの設定方法については、「コンテナ付き開発者ワークステーションのインストールガイド」で詳しく説明されています。
+> これらの変数のそれぞれの設定方法については、 [Installation Guide for a Developer Workstation with Containers](https://dev.sitecore.net/Downloads/Sitecore_Experience_Platform/100/Sitecore_Experience_Platform_100.aspx) で詳しく説明されています。
 
 入力された変数を更新したい場合は歓迎しますが、現時点では必須ではありません。主に空の変数を更新することに興味があるようですが、それは次の手順で説明します。
 
@@ -134,19 +134,19 @@ ISOLATION=default
 
 SitecoreDockerToolsモジュールを使用して、PowerShellでこれらを設定したり、生成したりすることもできます（`init.ps1`ではデフォルトで両方とも "Password12345 "に設定されています）。以下では、他の変数でも設定できる例を見てみましょう。
 
-
 #### Telerik暗号化キーの設定
 
 環境ファイルと同じフォルダ（例：C:\sitecore\docker-examples\getting-startedから、管理者として以下のPowerShellスクリプトを実行します。
 
 ```powershell
 Import-Module SitecoreDockerTools
-Set-DockerComposeEnvFileVariable "TELERIK_ENCRYPTION_KEY" -Value (Get-SitecoreRandomString 128)```
+Set-DockerComposeEnvFileVariable "TELERIK_ENCRYPTION_KEY" -Value (Get-SitecoreRandomString 128)
+```
 
-これはSitecoreDockerToolsモジュールをセッションにインポートし、2つのコマンドレットを利用して `TELERIK_ENCRYPTION_KEY` 変数を設定します。
+これは、*SitecoreDockerTools*モジュールをセッションにインポートし、2つのコマンドレットを利用して`TELERIK_ENCRYPTION_KEY`変数を設定します。
 
-* Set-DockerComposeEnvFileVariable - Docker Compose .envファイルの変数値を設定します。
-* Get-SitecoreRandomString - パスワードやキーとして使用するランダムな文字列を返します。
+* `Set-DockerComposeEnvFileVariable` - Docker Compose `.env`ファイルの変数値を設定します。
+* `Get-SitecoreRandomString` - パスワードやキーとして使用するランダムな文字列を返します。
 
 > 詳細はPowerShellの `Get-Help` コマンドレット（例：`Get-Help Set-DockerComposeEnvFileVariable`）を使って各コマンドを確認できます。また、`Get-Command` (例: `Get-Command -Module SitecoreDockerTools`) を使用して、使用可能なすべてのコマンドを一覧表示することもできます。
 
@@ -154,7 +154,7 @@ Set-DockerComposeEnvFileVariable "TELERIK_ENCRYPTION_KEY" -Value (Get-SitecoreRa
 
 次に、Identity Server に必要な変数を入力します。以下のPowerShellスクリプトを実行します。
 
-```shell
+```powershell
 Import-Module SitecoreDockerTools
 Set-DockerComposeEnvFileVariable "SITECORE_IDSECRET" -Value (Get-SitecoreRandomString 64 -DisallowSpecial)
 $idCertPassword = Get-SitecoreRandomString 12 -DisallowSpecial
@@ -170,7 +170,7 @@ Set-DockerComposeEnvFileVariable "SITECORE_ID_CERTIFICATE_PASSWORD" -Value $idCe
 
 次に、`SITECORE_LICENSE` 変数を入力します。以下のPowerShellスクリプトを実行し、`-Path` をSitecoreライセンスファイルの場所に置き換えます。
 
-```shell
+```powershell
 Import-Module SitecoreDockerTools
 Set-DockerComposeEnvFileVariable "SITECORE_LICENSE" -Value (ConvertTo-CompressedBase64String -Path "C:\License\license.xml")
 ```
@@ -255,7 +255,7 @@ mkcert -cert-file traefik\certs\xp0id.localhost.crt -key-file traefik\certs\xp0i
 
 > 証明書ファイル自体は通常ソース管理からは無視されるので、追跡されていないファイルを (git clean などで) 削除すると、それらのファイルを再度生成する必要があることに注意しましょう。
 
-### Windows ホストファイルのエントリを追加します
+### Windows ホストファイルのエントリの追加
 
 最後に、"xp0cm.localhost" と "xp0id.localhost" を Windows の hosts ファイルに追加します。これらはループバックIPアドレス127.0.0.0.1を指しているはずです。
 
@@ -268,7 +268,7 @@ hostsファイル(例: *C:WIndows\System32\drivers\etc\hosts* )を開いて、�
 
 あるいは、別の *SitecoreDockerTools* コマンドレット、`Add-HostsEntry` を使用することもできます。
 
-```
+```powershell
 Add-HostsEntry "xp0cm.localhost"
 Add-HostsEntry "xp0id.localhost"
 ```
@@ -339,7 +339,7 @@ b4279d4f6de7  scr.sitecore.com/platform/sitecore-id:10.0.0-ltsc2019             
 
 #### SQL Serverへの接続についての注意点
 
-ポートを使用してSQL Serverに接続する場合は、構文が少し異なります。上記のようにコロンではなくカンマを使用する必要があります。SQL Server認証では、"sa" アカウントと `.env` ファイルで `SQL_SA_PASSWORD` に指定した値（init.ps1ではデフォルトで "Password12345"）を使用して接続できます。
+ポートを使用してSQL Serverに接続する場合は、構文が少し異なります。上記のようにコロンではなくカンマを使用する必要があります。SQL Server認証では、"sa" アカウントと `.env` ファイルで `SQL_SA_PASSWORD` に指定した値（`init.ps1`ではデフォルトで "Password12345"）を使用して接続できます。
 
 ![SQL Server](/docs/SSMS-Connection.png "SQL Server")
 
