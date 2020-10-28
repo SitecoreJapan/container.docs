@@ -110,7 +110,7 @@ COPY --from=builder C:\out\transforms .\transforms\
 
 ### Sitecoreのランタイムイメージに適用
 
-cmサービスの [Sitececore runtime Dockerfile](build-sitecore-images.md#sitecore-ランタイム-dockerfile) を開く（例： C:\sitecore\docker-examples\custom-images\docker\build\cm\Dockerfile）。
+cmサービスの [Sitecore ランタイム Dockerfile](build-sitecore-images.md#sitecore-ランタイム-dockerfile) を開く（例： C:\sitecore\docker-examples\custom-images\docker\build\cm\Dockerfile）。
 
 先ほど集めた、`\transforms\solution\` に着地しているのが分かると思います。
 
@@ -204,7 +204,7 @@ RUN C:\tools\scripts\Invoke-XdtTransform.ps1 -Path .\ -XdtPath C:\transforms\rol
 
 > 例題の準備が完了したことを確認してください。
 
-まず、cdサービスの [Sitececore runtime Dockerfile](build-sitecore-images.md#sitecore-ランタイム-dockerfile)（例：C:\sitecore\docker-examples\custom-images\docker\build\cd\Dockerfile）を開きます。cdサービスは、ソリューション変換を適用しているが、**ロール変換はしていません**。
+まず、cdサービスの [Sitecore ランタイム Dockerfile](build-sitecore-images.md#sitecore-ランタイム-dockerfile)（例：C:\sitecore\docker-examples\custom-images\docker\build\cd\Dockerfile）を開きます。cdサービスは、ソリューション変換を適用しているが、**ロール変換はしていません**。
 
 PowerShellプロンプトを開いて、custom-imagesフォルダに移動します。Docker Compose upコマンドを使用してDocker Examplesを実行します。
 
@@ -256,5 +256,5 @@ docker-compose -f docker-compose.xm1.yml -f docker-compose.xm1.override.yml down
 
 ## 関連情報
 
-* [Microsoft XDT Transformation Syntax](https://docs.microsoft.com/en-us/previous-versions/aspnet/dd465326(v=vs.110))
+* [Microsoft XDT Transformation Syntax](https://docs.microsoft.com/ja-jp/previous-versions/aspnet/dd465326(v=vs.110))
 * [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)

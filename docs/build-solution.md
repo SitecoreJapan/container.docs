@@ -88,7 +88,7 @@ Dockerfileは [Docker buildコマンド](https://docs.docker.com/engine/referenc
 # escape=`
 ```
 
-次に、NuGetのリストアに必要なアーティファクトだけを集めるための `prep` 段階を行います。これは.NETビルドでよく行われる最適化です。[Dockerfile のベストプラクティス - NuGet リストアの最適化](dockerfile-best-practices.md#nuget-restore-optimizations) を参照してください。
+次に、NuGetのリストアに必要なアーティファクトだけを集めるための `prep` 段階を行います。これは.NETビルドでよく行われる最適化です。[Dockerfile のベストプラクティス - NuGet リストアの最適化](dockerfile-best-practices.md#nuget-リストアの最適化) を参照してください。
 
 ```yml
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS prep
@@ -250,7 +250,7 @@ docker-examples-solution  latest  9bb20b2ab6db  2 minutes ago  259MB
 
 まずは[トラブルシューティングガイド](troubleshooting.md) をご覧ください。
 
-ソリューションイメージ (または他の「アセットイメージ」) に特有のよくあるトラブルシューティングの問題は、イメージがコンテナとして実行されることがないため、結果として得られるファイルシステムをどのように探索するかが明らかではないということです。これは、[対話型シェルでイメージを実行](cheat-sheet.md#run-interactive-shell-in-an-image) することで可能です。
+ソリューションイメージ (または他の「アセットイメージ」) に特有のよくあるトラブルシューティングの問題は、イメージがコンテナとして実行されることがないため、結果として得られるファイルシステムをどのように探索するかが明らかではないということです。これは、[対話型シェルでイメージを実行](cheat-sheet.md#イメージ内での対話型シェルの実行) することで可能です。
 
 例えば、上記のソリューションイメージの例に対して対話型コマンドプロンプトを開くには (Nano Server には PowerShell がありません)、以下のようにします。
 
@@ -269,5 +269,5 @@ exit と入力して一時的なコンテナを削除し、前の PowerShell セ
 ## 関連情報
 
 * [Dockerfile参照](https://docs.docker.com/engine/reference/builder/)
-* [WindowsでのDockerfile](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-docker/manage-windows-dockerfile)
+* [WindowsでのDockerfile](https://docs.microsoft.com/ja-jp/virtualization/windowscontainers/manage-docker/manage-windows-dockerfile)
 * [Dockerfileのベストプラクティスとシナリオ](dockerfile-best-practices.md)

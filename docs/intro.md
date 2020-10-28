@@ -98,21 +98,21 @@ Sitecore開発が自然な流れになっているのには、いくつかの理
 
 その他の理由は以下の通りです。
 
-* **インストール不要** - SIF (Sitecore Install Framework) や SIM (Sitecore Instance Manager) などを使ったインストールが不要になります。Sitecoreは、すぐに使えるコンテナイメージを提供します。docker-compose upで簡単にインスタンスを立ち上げて稼働させましょう。コンテナイメージはすべて自動的にダウンロードされます。
+* **インストール不要** - SIF (Sitecore Install Framework) や SIM (Sitecore Instance Manager) などを使ったインストールが不要になります。Sitecoreは、すぐに使える[コンテナイメージ](#sitecore-イメージ)を提供します。`docker-compose up`で簡単にインスタンスを立ち上げて稼働させましょう。コンテナイメージはすべて自動的にダウンロードされます。
 
 * **マルチプロジェクトの効率化** - VMベースのアイソレーションの約束、実現。複数のSitecoreインスタンスを同時に実行することで、SQLやSolrのバージョンが異なることを気にすることなく、複数のSitecoreインスタンスを同時に実行できます。プロジェクト間を移動する際には、インスタンス全体を迅速に起動・停止し、マシンのリソースを有効活用します。
 
-* **簡素化されたオンボーディング** - オンボーディングプロセスは、前提条件のインストール、コードリポジトリのクローン作成、docker-compose upの実行というシンプルなものになりました。
+* **シンプルなオンボーディング** - オンボーディングプロセスは、[インストールの前提条件](environment-setup.md)、コードリポジトリのクローン作成、`docker-compose up`の実行というシンプルなものになりました。
 
 * **環境の一貫性** - 環境の不整合による問題を排除します。私のマシンでは動作する」ということはもうありません。ビルドをコンテナ化して、DevOps / 継続的インテグレーション (CI) を通じてビルド環境を完全にコントロールできます。
 
-* **環境の安定性** - コンテナの不変性により、ローカルの Sitecore インスタンスに問題が発生しても、docker-compose down と docker-compose up を実行するだけで心配ありません。
+* **環境の安定性** - コンテナの不変性により、ローカルの Sitecore インスタンスに問題が発生しても、`docker-compose down` と `docker-compose up` を実行するだけで心配ありません。
 
 #### 私のチームに適していますか？
 
-コンテナがSitecore開発者にもたらす多くのメリットが見えてきました。しかし、組織にとっては、他にも考慮しなければならないことがあるでしょう。コンテナとDockerがチームに適しているかどうかを判断するために、Sitecore Knowledge Centerのこちらの記事をご覧ください。
+コンテナがSitecore開発者にもたらす多くのメリットが見えてきました。しかし、組織にとっては、他にも考慮しなければならないことがあるでしょう。コンテナとDockerがチームに適しているかどうかを判断するために、[Sitecore Knowledge Centerのこちらの記事](https://www.sitecore.com/knowledge-center/getting-started/should-my-team-adopt-docker)をご覧ください。
 
-### Sitecoreのイメージ
+### Sitecore イメージ
 
 #### バージョン10.0以上
 
@@ -126,11 +126,11 @@ Sitecoreバージョン10.0からは、Sitecore Container Registry（SCR）で�
 
 ### Sitecore Dockerリソース
 
-[Sitecore のイメージ](#Sitecoreのイメージ) に加えて、以下のリソースにも精通しておきましょう。ドキュメントに沿っている場合、これらは途中で参照されます。
+[Sitecore のイメージ](#sitecore-イメージ) に加えて、以下のリソースにも精通しておきましょう。ドキュメントに沿っている場合、これらは途中で参照されます。
 
 * **[Docker Examples](https://github.com/Sitecore/docker-examples)** - コンテナ開発に推奨される構造を持つVisual Studioソリューションの例と、様々なトポロジでSitecoreインスタンスを構築するためのDockerコンパイルファイルを含むリポジトリ。
 
-* **[Helix Examples](https://github.com/Sitecore/Helix.Examples)**  - 同じSitecore Helixに特化したサンプルリポジトリで、Sitecore 10用にDockerコンテナで更新されています。
+* **[Helix Examples](https://github.com/Sitecore/Helix.Examples)**  - 同じ[Sitecore Helix](https://helix.sitecore.net/)に特化したサンプルリポジトリで、Sitecore 10用にDockerコンテナで更新されています。
 
 ## 次のステップ
 
@@ -151,8 +151,8 @@ Sitecoreバージョン10.0からは、Sitecore Container Registry（SCR）で�
 
 #### マイクロソフトドキュメント
 
-* https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction
-* https://docs.microsoft.com/en-us/virtualization/windowscontainers
+* https://docs.microsoft.com/ja-jp/dotnet/architecture/microservices/container-docker-introduction
+* https://docs.microsoft.com/ja-jp/virtualization/windowscontainers
 
 #### その他の学習教材
 
