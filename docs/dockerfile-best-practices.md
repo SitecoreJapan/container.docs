@@ -32,7 +32,7 @@ NuGetリストアを実行することは、Dockerfileでソリューション�
 
 簡単な例を示します。
 
-```
+```YML
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS build
 
 # NuGet のエッセンスをコピーし、別のレイヤーとして復元する
@@ -55,7 +55,7 @@ RUN msbuild /p:Configuration=Release
 
 これを[回避する方法](https://stackoverflow.com/questions/51372791/is-there-a-more-elegant-way-to-copy-specific-files-using-docker-copy-to-the-work)はいくつかありますが、そのほとんどはフォルダ構造とプロジェクト名を仮定する必要があります。ほとんどのSitecoreの例で見られる方法は、`robocopy`(これらの仮定を取り除く)と一緒に、別の "準備 "ビルドステージを利用しています。
 
-```
+```YML
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS prep
 
 # Gather only artifacts necessary for NuGet restore, retaining directory structure

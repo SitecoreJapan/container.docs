@@ -75,7 +75,7 @@ WindowsのシステムトレイにあるDockerの項目（クジラのアイコ�
 
 コマンドプロンプトからdocker versionを実行して、インストールの基本的な詳細を確認します。DockerクライアントとDockerサーバーのOSが "windows "と表示されているはずです。
 
-```shell
+```powershell
 PS C:\WINDOWS\system32> docker version
 Client: Docker Engine - Community
  Version:           19.03.8

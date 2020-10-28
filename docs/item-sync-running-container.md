@@ -87,7 +87,7 @@ Unicornの同期に使用するベースファイルシステムのパスは、�
 
 上記の例では、`LOCAL_ITEM_PATH`は、`.env`内でソリューション内の Unicorn アイテムのルートの相対パスに設定されます。Sitecore Helix のプラクティスに従っている場合、これがルートソースフォルダである可能性が高いです。
 
-```
+```yml
 LOCAL_ITEM_PATH=.\src
 ```
 
@@ -119,7 +119,7 @@ Unicornの[トランスペアレントシンク](https://kamsar.net/index.php/20
       UNICORN_ENABLE_TRANSPARENT_SYNC: ${UNICORN_ENABLE_TRANSPARENT_SYNC}
 ```
 
-```
+```yml
 UNICORN_ENABLE_TRANSPARENT_SYNC=true
 ```
 

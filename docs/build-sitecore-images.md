@@ -71,7 +71,7 @@ cmサービスのDockerfileを開く（例：*C:\sitecore\docker-examples\custom
 
 ファイルは複数のビルドステージを初期化することで開始します。
 
-```
+```YML
 ARG BASE_IMAGE
 ARG SXA_IMAGE
 ARG SPE_IMAGE
@@ -91,7 +91,7 @@ FROM ${BASE_IMAGE}
 
 開発ツールは、ツールイメージからコピーされます（C:\toolsへ）。これらは、[ローカル開発のための ENTRYPOINT を提供](file-deployment.md#understand-development-entrypoint-scripts) するとともに、後で変形を適用するために使用されます。
 
-```
+```YML
 COPY --from=tooling \tools\ \tools\
 ```
 
@@ -99,7 +99,7 @@ COPY --from=tooling \tools\ \tools\
 
 これはIISイメージを使用しているので、私たちのカスタマイズのほとんどは、`C:\inetpub\wwwroot` 内で行われますので、これは作業ディレクトリに設定されています。
 
-```
+```YML
 WORKDIR C:\inetpub\wwwroot
 ```
 
@@ -109,7 +109,7 @@ Sitecore モジュールは、cm ロールに[必要な指示](module-reference.
 
 > Sitecore モジュールの詳細については、[Sitecoreモジュールの追加](add-modules.md) ガイドを参照してください。
 
-```
+```YML
 COPY --from=spe \module\cm\content .\
 COPY --from=sxa \module\cm\content .\
 COPY --from=sxa \module\tools \module\tools
@@ -123,7 +123,7 @@ RUN C:\module\tools\Initialize-Content.ps1 -TargetPath .\; `
 
 次に、ソリューションのビルドイメージのファイルをコピーします。出力ファイルは例のソリューションイメージ `\artifacts\website` に保存されています。
 
-```
+```YML
 COPY --from=solution \artifacts\website\ .\
 ```
 
@@ -135,7 +135,7 @@ cm サービスには、ソリューション変換ファイルとロール変�
 
 まず、ソリューション変換をコピーして(思い出したと思いますが、出力された変換は、例のソリューション画像に\artifacts\transforms\ に保存されています)、次にロール変換を行います。
 
-```
+```YML
 COPY --from=solution \artifacts\transforms\ \transforms\solution\
 COPY .\transforms\ \transforms\role\
 ```
@@ -144,7 +144,7 @@ COPY .\transforms\ \transforms\role\
 
 最後に、解決策とロール変換をウェブルートに適用します。
 
-```
+```YML
 RUN C:\tools\scripts\Invoke-XdtTransform.ps1 -Path .\ -XdtPath C:\transforms\solution\DockerExamples.Website
 RUN C:\tools\scripts\Invoke-XdtTransform.ps1 -Path .\ -XdtPath C:\transforms\role
 ```
@@ -157,7 +157,7 @@ RUN C:\tools\scripts\Invoke-XdtTransform.ps1 -Path .\ -XdtPath C:\transforms\rol
 
 idサービスのDockerfileを開く（例：C:\sitecore\docker-examples\custom-images\docker\build\id\Dockerfile）。
 
-```
+```YML
 # escape=`
 
 ARG BASE_IMAGE
@@ -218,7 +218,7 @@ cm:
 
 PowerShellプロンプトを開き、Composeファイルと同じフォルダ(例: C:\sitecore\docker-examples\custom-images )から以下を実行します。
 
-```
+```powershell
 docker-compose build
 ```
 
@@ -226,7 +226,7 @@ docker-compose build
 
 これにより、ソリューションイメージのビルドプロセスが開始され、定義されたすべてのカスタムSitecoreランタイムイメージが作成されます。すべてが順調に進むと、カスタムSitecoreランタイムイメージが作成されます。
 
-```
+```powershell
 Building solution
 [...]
 Successfully built baeb10e0ed5a
@@ -235,11 +235,11 @@ Successfully tagged docker-examples-xp0-cm:latest
 
 すべてのDockerイメージをリストアップすることで、イメージが作成されたことが確認できます。
 
-```
+```powershell
 docker images
 ```
 
-```
+```powershell
 REPOSITORY                                  TAG     IMAGE ID      CREATED        SIZE
 docker-examples-xp0-cm                      latest  baeb10e0ed5a  2 minutes ago  9.75GB
 docker-examples-xp0-solr                    latest  a6cb09ff4658  2 minutes ago  5.19GB
