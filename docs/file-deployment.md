@@ -30,7 +30,7 @@ DockerのサンプルソリューションからSitecore Experience Platform - S
 
 PowerShell 管理者プロンプトを開き、custom-images フォルダ（例：C:\sitecore\docker-examples\custom-images）に移動します。以下のコマンドを実行し、-LicenseXmlPathをSitecoreライセンスファイルの場所に置き換えます。
 
-```
+```powershell
 .\init.ps1 -LicenseXmlPath C:\License\license.xml
 ```
 
@@ -126,7 +126,7 @@ cmサービスの[Sitecore ランタイム Dockerfile](build-sitecore-images.md#
 
 `TOOLING_IMAGE` は、最初に `ARG`（[Docker Composeで設定したもの](file-deployment.md#docker-composeで設定する)）を持ってきて、ビルド段階の名前付きツールとして起動されているのがわかります。
 
-```
+```YML
 ARG TOOLING_IMAGE
 [...]
 FROM ${TOOLING_IMAGE} as tooling
@@ -134,7 +134,7 @@ FROM ${TOOLING_IMAGE} as tooling
 
 すると、`tools` フォルダ( `ENTRYPOINT` スクリプトを含む)が `tooling` イメージからコピーされているのがわかります(C:\toolsへ)。
 
-```
+```YML
 COPY --from=tooling \tools\ \tools\
 ```
 
@@ -152,7 +152,7 @@ Sitecore runtime Dockerfileに必要なものはこれだけです。ここで�
 
 どのように設定されているのか、cmサービスを見てみましょう。
 
-```
+```YML
 cm:
   image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-xp0-cm:${VERSION:-latest}
   build:
@@ -197,7 +197,7 @@ xconnect:
 
 PowerShellプロンプトを開き、custom-imagesフォルダ（例：C:\sitecore\docker-examples\custom-images）に移動します。Docker Compose `up`コマンドを使ってDocker Examplesを実行します。
 
-```
+```powershell
 docker-compose up -d
 ```
 
@@ -213,7 +213,7 @@ docker-compose up -d
 
 Visual Studioで *Sample Inner Sublayout.ascx* ファイルを開き、変更を加えます。例えば、Dockerロゴの下に新しい段落を追加します。
 
-```C#
+```ASP
 <%@ Control Language="c#" AutoEventWireup="true" TargetSchema="http://schemas.microsoft.com/intellisense/ie5" %>
 <div id="InnerCenter">
     <div id="Header">
@@ -243,7 +243,7 @@ xConnect の例でもお気軽に試してみてください。ソリューシ�
 
 終わったら、`down` コマンドを使ってコンテナを停止して削除します。
 
-```
+```powershell
 docker-compose down
 ```
 
@@ -253,7 +253,7 @@ docker-compose down
 
 これらのフォルダ内のファイルを手動で削除するか、付属の `clean.ps1` スクリプトを使用してください。*custom-images* フォルダに移動し、PowerShell 管理者プロンプトから実行してください。
 
-```
+```powershell
 .\docker\clean.ps1
 ```
 

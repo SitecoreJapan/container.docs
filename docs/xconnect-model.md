@@ -26,7 +26,7 @@ sidebar_label: カスタム xConnect モデルを含む
 
 PowerShell 管理者プロンプトを開き、custom-images フォルダ（例：C:\sitecore\docker-examples\custom-images）に移動します。以下のコマンドを実行し、`-LicenseXmlPath` をSitecoreライセンスファイルの場所に置き換えます。
 
-```
+```powershell
 .\init.ps1 -LicenseXmlPath C:\License\license.xml
 ```
 
@@ -84,7 +84,7 @@ custom-imagesフォルダに移動し、ここにある `Dockerfile`（例：C:\
 
 xConnect(*DockerExamples.XConnect.csproj*)は、Webサイト・プラットフォームビルド(*DockerExamples.Website.csproj*)とは別にビルドされており、出力先は `C:\out\xconnect` となっています。
 
-```
+```YML
 RUN msbuild .\src\DockerExamples.XConnect\DockerExamples.XConnect.csproj /p:Configuration=Release /p:DeployOnBuild=True /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:PublishUrl=C:\out\xconnect
 ```
 
@@ -92,7 +92,7 @@ RUN msbuild .\src\DockerExamples.XConnect\DockerExamples.XConnect.csproj /p:Conf
 
 * \artifacts\xconnect
 
-```
+```YML
 COPY --from=builder C:\out\xconnect .\xconnect\
 ```
 
@@ -104,14 +104,14 @@ COPY --from=builder C:\out\xconnect .\xconnect\
 
 *App.XConnect.ModelBuilder* の例では、出力パスに引数を指定しています。ビルダーの段階で、*App.XConnect.ModelBuilder* をビルドし、それを使用して xConnect モデル JSON ファイルを生成することができます。
 
-```
+```YML
 RUN msbuild .\src\App.XConnect.ModelBuilder\App.XConnect.ModelBuilder.csproj /p:Configuration=Release /p:OutDir=C:\build
 RUN .\App.XConnect.ModelBuilder C:\out\xconnect\models
 ```
 
 そして、これらをコピーするように、最終的な成果物の指示を調整してください。
 
-```
+```YML
 COPY --from=builder C:\out\xconnect .\xconnect\
 COPY --from=builder C:\out\xconnect\models .\xconnect\App_Data\Models\
 ```
@@ -126,7 +126,7 @@ xconnectサービス用の[Sitececore ランタイム Dockerfile](build-sitecore
 
 IIS イメージを使用するので、`C:\inetpub\wwwroot` を作業ディレクトリに設定し、ソリューション・ビルド・イメージの xConnect ビルド・ファイルをコピーします。
 
-```
+```YML
 WORKDIR C:\inetpub\wwwroot
 COPY --from=solution \artifacts\xconnect\ .\
 ```
@@ -135,26 +135,26 @@ COPY --from=solution \artifacts\xconnect\ .\
 
 xConnect のワーカーロールは .NET Core であるため、`C:\service` の異なる作業ディレクトリを使用する。
 
-```
+```YML
 WORKDIR C:\service
 ```
 
 さて、[上の表](#アーティファクトを必要とする-sitecore-イメージ)を見てみると、どのアーティファクトが含まれるか、ワーカーのロールがもう少し選択的になっていることに気づくでしょう。*xdbsearchworker* イメージは、モデルJSONファイルのみを必要とします。
 
-```
+```YML
 COPY --from=solution \artifacts\xconnect\App_Data\Models\ .\App_Data\Models\
 ```
 
 ただし、*xdbautomationworker*（例：C:\sitecore\docker-examples\custom-images\docker\build\xdbautomationworker\Dockerfile）は、モデルアセンブリとxmlファイルが必要です。
 
-```
+```YML
 COPY --from=solution \artifacts\xconnect\bin\ .\
 COPY --from=solution \artifacts\xconnect\App_Data\Config\Sitecore\MarketingAutomation\ .\App_Data\Config\Sitecore\MarketingAutomation\
 ```
 
 *cortexprocessingworker*（例：C:\sitecore\docker-examples\custom-images\docker\build\cortexprocessingworker\Dockerfile ）では、モデル・アセンブリとJSONファイルが必要ですが、C:Dockerfileでは、モデル・アセンブリとJSONファイルが必要です。
 
-```
+```YML
 COPY --from=solution \artifacts\xconnect\bin\ .\
 COPY --from=solution \artifacts\xconnect\App_Data\Models\ .\App_Data\Models\
 ```
@@ -165,7 +165,7 @@ COPY --from=solution \artifacts\xconnect\App_Data\Models\ .\App_Data\Models\
 
 PowerShellプロンプトを開き、custom-imagesフォルダ（例：C:\sitecore\docker-examples\custom-images）に移動します。Docker Compose` up`コマンドを使用してDocker Examplesを実行します。
 
-```
+```powershell
 docker-compose up -d
 ```
 
@@ -179,7 +179,7 @@ docker-compose up -d
 
 終わったら、`down`コマンドでコンテナを停止して削除します。
 
-```
+```powershell
 docker-compose down
 ```
 

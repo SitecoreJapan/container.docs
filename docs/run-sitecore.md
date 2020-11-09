@@ -30,8 +30,8 @@ sidebar_label: 最初のSitecoreインスタンスの実行
 
 PowerShell プロンプトを開き、get-started フォルダに移動し、内容を確認します。
 
-```shell
-cd C:\sitecoredocker-examples-getting-started
+```powershell
+cd C:\sitecore\docker-examples\getting-started
 ls
 ```
 
@@ -187,7 +187,7 @@ Sitecore のライセンスファイルは非常に大きいので、すべて�
 
 #### traefikフォルダ
 
-*getting-startedtraefik* フォルダに移動し、内容を見てみましょう。以下のようなものがあります。
+*getting-started\traefik* フォルダに移動し、内容を見てみましょう。以下のようなものがあります。
 
 * **certs** - 生成された証明書を置く必要がある空のフォルダ。
 * ***config/dynamic/certs_config.yaml** - Traefik コンテナで使用する Traefik 設定ファイル。
@@ -226,7 +226,7 @@ tls:
 
 > Traefik での TLS 設定の詳細については、[Traefik のドキュメント](https://docs.traefik.io/https/tls/) を参照してください。
 
-これは、certs フォルダ内の証明書ファイルを参照して、ボリュームマウントされたパス (`C:\\etctraefik`) も使用していることがわかります。これらは次のステップで作成する必要がある証明書です。
+これは、certs フォルダ内の証明書ファイルを参照して、ボリュームマウントされたパス (`C:\etc\traefik`) も使用していることがわかります。これらは次のステップで作成する必要がある証明書です。
 
 これらの証明書を作成するには、[mkcert](https://github.com/FiloSottile/mkcert) ユーティリティを使うことをお勧めします。
 
@@ -239,16 +239,16 @@ tls:
 
 または、以下のコマンドで [Chocolatey](https://chocolatey.org/) を使ってインストールします。
 
-```shell
+```powershell
 choco install mkcert
 mkcert -install
 ```
 
 #### 証明書の生成
 
-mkcertがインストールされたら、get-startedフォルダ（例：*C:\sitecoredocker-examplesgetting-started*）から以下のコマンドを実行して、必要な証明書を生成します。
+mkcertがインストールされたら、get-startedフォルダ（例：*C:\sitecore\docker-examples\getting-started*）から以下のコマンドを実行して、必要な証明書を生成します。
 
-```shell
+```powershell
 mkcert -cert-file traefik\certs\xp0cm.localhost.crt -key-file traefik\certs\xp0cm.localhost.key "xp0cm.localhost"
 mkcert -cert-file traefik\certs\xp0id.localhost.crt -key-file traefik\certs\xp0id.localhost.key "xp0id.localhost"
 ```
@@ -276,9 +276,9 @@ Add-HostsEntry "xp0id.localhost"
 ## Sitecoreの起動
 
 準備が完了したら、Docker Composeコマンド1つでSitecoreインスタンスを起動します。
-Composeファイルと同じフォルダ（例：*C:\sitecoredocker-examplesgetgetting-started*）から以下を実行します。
+Composeファイルと同じフォルダ（例：*C:\sitecore\docker-examples\getting-started*）から以下を実行します。
 
-```shell
+```powershell
 docker-compose up -d
 ```
 
@@ -298,14 +298,13 @@ docker-compose up -d
 
 `docker ps` コマンドで作成したコンテナを見ることができます。
 
-```shell
+```powershell
 docker ps
 ```
 
 これは、"Up "のステータスで示されるように、実行中のすべてのコンテナのリストを表示します。また、コンテナID、使用されているイメージ、コンテナが公開されているポートも表示されます。
 
-```shell
-
+```powershell
 CONTAINER ID  IMAGE                                                                          COMMAND                   CREATED             STATUS                            PORTS                                                 NAMES
 75684e9146f2  traefik:v2.2.0-windowsservercore-1809                                          "/traefik --ping --a…"    7 seconds ago       Up 3 seconds (healthy: starting)  80/tcp, 0.0.0.0:443->443/tcp, 0.0.0.0:8079->8080/tcp  sitecore-xp0_traefik_1
 67be2b1350e1  scr.sitecore.com/platform/sitecore-xp0-cm:10.0.0-ltsc2019                      "C:\\LogMonitor\\LogMo…"  21 seconds ago      Up 11 seconds (healthy)           80/tcp                                                sitecore-xp0_cm_1
@@ -351,7 +350,7 @@ https://xp0cm.localhost を参照すると、Sitecore のデフォルトのウ�
 
 最後に、大きな問題がないことを確認するためには、ログを見ておくとよいでしょう。以下のコマンドを実行して、すべてのコンテナのログを確認してください。
 
-```shell
+```powershell
 docker-compose logs -f --tail 20
 ```
 
@@ -363,13 +362,13 @@ docker-compose logs -f --tail 20
 
 Docker Composeコマンド1つで、同様にSitecoreインスタンスを停止させることができます。
 
-```shell
+```powershell
 docker-compose stop
 ```
 
 これでコンテナは停止しますが、コンテナは削除されません。その後、`docker-compose start` で再度起動することができます。さらに一歩進んだ方法としては、down コマンドを使用します。
 
-```shell
+```powershell
 docker-compose down
 ```
 
@@ -408,7 +407,7 @@ solr:
 
 これらのフォルダ内のファイルを手動で削除するか、付属の `clean.ps1` スクリプトを使用してください。 get-startedフォルダに移動し、PowerShell管理者プロンプトから実行してください。 
 
-```shell
+```powershell
 .\clean.ps1
 ```
 

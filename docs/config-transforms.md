@@ -26,7 +26,7 @@ Sitecoreの実装では、Sitecoreのconfigパッチでは変更できない設�
 
 PowerShell 管理者プロンプトを開き、custom-images フォルダ（例：C:\sitecoredocker-examples\custom-images）に移動します。以下のコマンドを実行し、`-LicenseXmlPath` をSitecoreライセンスファイルの場所に置き換えます。
 
-```
+```powershell
 .\init.ps1 -LicenseXmlPath C:\License\license.xml
 ```
 
@@ -94,7 +94,7 @@ custom-imagesフォルダに移動して、ここにある `Dockerfile`（例：
 
 トランスフォームファイル(`.xdt`拡張子)は、ビルダの中に集められて、C:\out\transforms に落とされているのがわかります。ここでは、(`/s` フラグと一緒に) robocopy を使用することが、フォルダ構造を保持するために重要です。
 
-```
+```YML
 RUN Invoke-Expression 'robocopy C:\build\src C:\out\transforms /s /ndl /njh /njs *.xdt'
 ```
 
@@ -104,7 +104,7 @@ RUN Invoke-Expression 'robocopy C:\build\src C:\out\transforms /s /ndl /njh /njs
 
 * \artifacts\transforms
 
-```
+```YML
 COPY --from=builder C:\out\transforms .\transforms\
 ```
 
@@ -114,13 +114,13 @@ cmサービスの [Sitecore ランタイム Dockerfile](build-sitecore-images.md
 
 先ほど集めた、`\transforms\solution\` に着地しているのが分かると思います。
 
-```
+```YML
 COPY --from=solution \artifacts\transforms\ \transforms\solution\
 ```
 
 開発ツールを tooling イメージからコピーし (C:\tools に)、Invoke-XdtTransform.ps1 スクリプトを使用して変換を行います。
 
-```
+```YML
 COPY --from=tooling \tools\ \tools\
 RUN C:\tools\scripts\Invoke-XdtTransform.ps1 -Path .\ -XdtPath C:\transforms\solution\DockerExamples.Website
 ```
@@ -136,7 +136,7 @@ Invoke-XdtTransform.ps1スクリプトは、-Pathと-XdtPathパラメータに2�
 
 Dockerの例のソリューションは、単一の「Webサイト」プロジェクトのシンプルな例です。[Sitecore Helixのプラクティス](https://helix.sitecore.net/) に従った実際のソリューションでは、入れ子になったフォルダ構造と[レイヤーの優先度](https://helix.sitecore.net/principles/architecture-principles/layers.html)(すなわち、Project > Feature > Foundation)に対応するために、transformコマンドを調整する必要があります。
 
-```
+```YML
 RUN Get-ChildItem C:\transforms\solution\Foundation\*\website | ForEach-Object { & C:\tools\scripts\Invoke-XdtTransform.ps1 -Path .\ -XdtPath $_.FullName }; `
     Get-ChildItem C:\transforms\solution\Feature\*\website | ForEach-Object { & C:\tools\scripts\Invoke-XdtTransform.ps1 -Path .\ -XdtPath $_.FullName }; `
     Get-ChildItem C:\transforms\solution\Project\*\website | ForEach-Object { & C:\tools\scripts\Invoke-XdtTransform.ps1 -Path .\ -XdtPath $_.FullName };
@@ -152,7 +152,7 @@ RUN Get-ChildItem C:\transforms\solution\Foundation\*\website | ForEach-Object {
 
 次のようになります。
 
-```
+```YML
 RUN $xdts = [System.Collections.ArrayList]@(); `
     $xdts.AddRange(@(Get-ChildItem -Path .\*.xdt)); `
     $xdts.AddRange(@(Get-ChildItem -Path .\App_Config\*.xdt -Recurse)); `
@@ -190,13 +190,13 @@ cmサービス用の[Sitecore ランタイム Dockerfile](build-sitecore-images.
 
 トランスフォームフォルダの内容は、Docker build contextからコピーして、`\transforms\role` に着地しています。
 
-```shell
+```powershell
 COPY .\transforms\ \transforms\role\
 ```
 
 同じ `Invoke-XdtTransform.ps1` スクリプトを使用して、[ソリューション変換](#sitecoreのランタイムイメージに適用) の後に適用されます。
 
-```shell
+```powershell
 RUN C:\tools\scripts\Invoke-XdtTransform.ps1 -Path .\ -XdtPath C:\transforms\role
 ```
 
@@ -208,7 +208,7 @@ RUN C:\tools\scripts\Invoke-XdtTransform.ps1 -Path .\ -XdtPath C:\transforms\rol
 
 PowerShellプロンプトを開いて、custom-imagesフォルダに移動します。Docker Compose upコマンドを使用してDocker Examplesを実行します。
 
-```shell
+```powershell
 docker-compose -f docker-compose.xm1.yml -f docker-compose.xm1.override.yml up -d
 ```
 
@@ -233,13 +233,13 @@ cmサイトでは「Role transform」、cdサイトでは「Solution transform�
 
 config transform の変更を有効にするにはイメージビルドが必要なので、以下のコマンドを実行して、実行中のコンテナに適用された変更を確認する必要があります。
 
-```shell
+```powershell
 docker-compose -f docker-compose.xm1.yml -f docker-compose.xm1.override.yml up --build -d
 ```
 
 また、影響を受けるコンテナのみをビルドするなど、より選択的な方法もあります。
 
-```shell
+```powershell
 docker-compose -f docker-compose.xm1.yml -f docker-compose.xm1.override.yml build solution cm cd
 docker-compose -f docker-compose.xm1.yml -f docker-compose.xm1.override.yml up -d
 ```
@@ -250,7 +250,7 @@ docker-compose -f docker-compose.xm1.yml -f docker-compose.xm1.override.yml up -
 
 終わったら、downコマンドを使ってコンテナを停止して削除します。
 
-```shell
+```powershell
 docker-compose -f docker-compose.xm1.yml -f docker-compose.xm1.override.yml down
 ```
 
