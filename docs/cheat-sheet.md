@@ -13,21 +13,21 @@ Dockerの公式ドキュメントは素晴らしいものですが、最初は�
 
 利用可能なコマンドをすべてリストアップします。
 
-```shell
+```powershell
 docker help
 docker-compose help
 ```
 
 `--help` を使うと、特定のコマンドの詳細情報を表示することができます。
 
-```shell
+```powershell
 docker <command> --help
 docker-compose <command> --help
 ```
 
 Docker環境の高レベル情報（バージョン、ルートディレクトリ、デフォルトのアイソレーションモードなど）を表示するには、以下のようにします。
 
-```shell
+```powershell
 docker info
 ```
 
@@ -35,7 +35,7 @@ docker info
 
 **イメージをリストアップ** (中間画像を含む場合は -a を使用)
 
-```shell
+```powershell
 docker image ls
 docker images
 ```
@@ -44,14 +44,14 @@ docker images
 
 **イメージの削除**
 
-```shell
+```powershell
 docker image rm <image>
 docker rmi <image>
 ```
 
 `<image>` には、画像のIDかフルネームのどちらかを指定することができます。特筆すべきことは、id はそれを一意に識別するために最低限の文字数しか必要としないということです。例えば、次のようなイメージリストがあるとします。
 
-```shell
+```powershell
 REPOSITORY                            TAG       IMAGE ID      CREATED       SIZE
 mcr.microsoft.com/windows/servercore  ltsc2019  8351e66084ac  2 months ago  4.82GB
 mcr.microsoft.com/windows/nanoserver  1809      880394ef5494  2 months ago  251MB
@@ -59,7 +59,7 @@ mcr.microsoft.com/windows/nanoserver  1809      880394ef5494  2 months ago  251M
 
 これら3つのコマンドはすべてナノサーバーイメージを削除します。
 
-```shell
+```powershell
 docker image rm mcr.microsoft.com/windows/nanoserver
 docker rmi 880394ef5494
 docker rmi 88
@@ -67,19 +67,19 @@ docker rmi 88
 
 すべてのイメージを削除するには、次のようにします。
 
-```shell
+```powershell
 docker rmi $(docker images -a -q)
 ```
 
 しかし、より多くの場合は、より選択的に使用したいと思うでしょう。そのためには、findstrと組み合わせた画像リストの書式設定を利用します。例えば、特定の名前やタグを持つすべての画像を削除するには、以下のようにします。
 
-```shell
+```powershell
 docker rmi $(docker images --format "{{.Repository}}:{{.Tag}}"|findstr "<search_text>")
 ```
 
 **イメージの検査**
 
-```shell
+```powershell
 docker image inspect <image>
 docker inspect <image>
 ```
@@ -97,14 +97,14 @@ docker inspect <image>
 
 **コンテナをリストアップする** (停止したコンテナを含めるには `-a` を使用します)
 
-```shell
+```powershell
 docker container ls
 docker ps
 ```
 
 `-f` (または `--filter`) オプションを使って結果をフィルタリングすることができます。例えば、実行中のSitecore CMイメージだけを表示するには、以下のようにします。
 
-```shell
+```powershell
 docker ps -f "name=cm"
 ```
 
@@ -113,7 +113,7 @@ docker ps -f "name=cm"
 
 **コンテナの削除** (ボリュームを削除するには `-v` を使います)
 
-```shell
+```powershell
 docker container rm <container>
 docker rm <container>
 ```
@@ -122,7 +122,7 @@ docker rm <container>
 
 停止しているコンテナをすべて削除するには、次のようにします。
 
-```shell
+```powershell
 docker rm $(docker ps -a -q)
 ```
 
@@ -130,7 +130,7 @@ docker rm $(docker ps -a -q)
 
 **コンテナの検査**
 
-```shell
+```powershell
 docker container inspect <container>
 docker inspect <container>
 ```
@@ -150,7 +150,7 @@ docker inspect <container>
 
 コンテナは個別に起動・停止することができます。
 
-```shell
+```powershell
 docker container start <container>
 docker start <container>
 docker container stop <container>
@@ -161,20 +161,20 @@ docker stop <container>
 
 **コンテナとローカルファイルシステム間でファイルをコピーする**
 
-```shell
+```powershell
 docker cp <src_path> <container>:<dest_path>
 docker cp <container>:<src_path> <dest_path>
 ```
 
 例えば、ファイルをコンテナにコピーするには
 
-```shell
+```powershell
 docker cp file.txt 2c26f76568d4:/tools/
 ```
 
 またはコンテナからフォルダをコピーします。
 
-```shell
+```powershell
 docker cp 2c26f76568d4:/inetpub/wwwroot/App_Config/ ./
 ```
 
@@ -182,14 +182,14 @@ docker cp 2c26f76568d4:/inetpub/wwwroot/App_Config/ ./
 
 **ログの表示**
 
-```shell
+```powershell
 docker container logs <container>
 docker logs <container>
 ```
 
 `-f` (または `--follow`) を使用してログ出力をストリーム配信することができます。
 
-```shell
+```powershell
 docker logs -f <container>
 ```
 
@@ -197,7 +197,7 @@ docker logs -f <container>
 
 これらはほとんどのコンテナではかなり大きくなりますので、 `--tail` や `--until` オプションを使って制限したいと思うでしょう。例えば、最後の20件のログのみを表示するには、次のようにします。
 
-```shell
+```powershell
 docker logs -f --tail 20 <container>
 ```
 
@@ -209,21 +209,21 @@ inspectコマンドの場合、出力データはすでにJSON形式になって
 
 いくつかの例を紹介します。
 
-**コンテナの画像名を取得する**
+**コンテナのイメージ名を取得する**
 
-```
+```powershell
 docker inspect --format='{{.Config.Image}}' <container>
 ```
 
 **コンテナのIPアドレスを取得する**
 
-```
+```powershell
 docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container>
 ```
 
 リストコマンドの場合、出力はテーブル形式になっているので、利用可能なプロパティを見つけるにはもう少し調べる必要があります。Dockerのドキュメントを参照するか（[イメージについてはこちら](https://docs.docker.com/engine/reference/commandline/images/#format-the-output)、[コンテナについてはこちら](https://docs.docker.com/engine/reference/commandline/ps/#formatting)を参照）、以下のコマンドを使って出力をJSONとしてフォーマットすることができます。
 
-```
+```powershell
 docker images --format "{{json .}}"
 docker ps --format "{{json .}}"
 ```
@@ -232,13 +232,13 @@ docker ps --format "{{json .}}"
 
 **カスタムイメージリスト**
 
-```
+```powershell
 docker images --format "{{.ID}}: {{.Repository}}"
 ```
 
 **カスタムコンテナリスト** (table ディレクティブを使用)
 
-```
+```powershell
 docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}"
 ```
 
@@ -246,7 +246,7 @@ docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}"
 
 `powershell` は、それをサポートしているイメージでのみ使用できます。省略した場合は、デフォルトの`cmd`シェルが使用されます。
 
-```
+```powershell
 docker run -it --rm <image> [powershell]
 ```
 
@@ -256,7 +256,7 @@ docker run -it --rm <image> [powershell]
 
 デフォルトの `ENTRYPOINT` によっては、これがすべてのイメージで動作しない場合があることに注意してください。その場合は、デタッチドモードで実行する必要があります。
 
-```
+```powershell
 docker run -d <image>
 ```
 
@@ -266,7 +266,7 @@ docker run -d <image>
 
 以下のようにすれば、実行中の Windows コンテナ内で対話型のシェルプロンプトを開くことができます。 `powershell` は、それをサポートしているイメージ上でのみ使用できます。
 
-```
+```powershell
 docker exec -it <container> powershell
 docker exec -it <container> cmd
 ```
@@ -279,7 +279,7 @@ Dockerは自動的に未使用のリソースを削除するわけではあり�
 
 これを助けるために最も便利なコマンドは、以下の通りです。
 
-```
+```powershell
 docker system prune
 ```
 
@@ -305,7 +305,7 @@ docker system prune
 
 Compose ファイルの名前が他のものである場合は、`-f` フラグを使用して明示的に指定します。
 
-```
+```powershell
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 ```
 
@@ -313,7 +313,7 @@ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
 集約された結果を実際に見るには `config` を使用します。例えば、以下のようになります。
 
-```
+```powershell
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml config
 ```
 
@@ -332,13 +332,13 @@ services:
 
 を使って id と cm コンテナだけを `restart` することができます。
 
-```
+```powershell
 docker-compose restart id cm
 ```
 
 **コンテナの作成と起動**
 
-```
+```powershell
 docker-compose up -d
 ```
 
@@ -348,7 +348,7 @@ docker-compose up -d
 
 **コンテナの停止**
 
-```
+```powershell
 docker-compose stop
 ```
 
@@ -356,7 +356,7 @@ docker-compose stop
 
 **コンテナの起動**
 
-```
+```powershell
 docker-compose start
 ```
 
@@ -364,7 +364,7 @@ docker-compose start
 
 **コンテナの再起動**
 
-```
+```powershell
 docker-compose restart
 ```
 
@@ -372,7 +372,7 @@ docker-compose restart
 
 **コンテナの停止と削除** (ボリュームを削除するには `-v` を使用)
 
-```
+```powershell
 docker-compose down
 ```
 
@@ -380,19 +380,19 @@ docker-compose down
 
 **コンテナの一覧表示** (停止しているコンテナを含めるには `-a` を使用)
 
-```
+```powershell
 docker-compose ps
 ```
 
 サービスの名前をリストアップするには、`-services` オプションを使用します。
 
-```
+```powershell
 docker-compose ps --services
 ```
 
 **イメージを構築する**
 
-```
+```powershell
 docker-compose build
 ```
 
@@ -400,25 +400,25 @@ docker-compose build
 
 `up` で `--build` フラグを使用すると、最新のコードでコンテナを再ビルドして実行することもできます。
 
-```
+```powershell
 docker-compose up --build -d
 ```
 
 **ログの表示**
 
-```
+```powershell
 docker-compose logs
 ```
 
 これはすべてのコンテナからのログを表示することに注意してください。`-tail` オプションを使用すると、行数を制限したり、特定のコンテナに対してフィルタリングしたりすることができます。例えば、cm と xconnect コンテナからの最後の 20 件のログエントリのみを表示するには、--tail オプションを使用します。
 
-```
+```powershell
 docker-compose logs --tail 20 cm xconnect
 ```
 
 また、`-f` (または `--follow`) を使用してログ出力をストリーム配信することもできます。
 
-```
+```powershell
 docker-compose logs -f --tail 20
 ```
 

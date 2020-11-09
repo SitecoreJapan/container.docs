@@ -90,7 +90,7 @@ Dockerfileは [Docker buildコマンド](https://docs.docker.com/engine/referenc
 
 次に、NuGetのリストアに必要なアーティファクトだけを集めるための `prep` 段階を行います。これは.NETビルドでよく行われる最適化です。[Dockerfile のベストプラクティス - NuGet リストアの最適化](dockerfile-best-practices.md#nuget-リストアの最適化) を参照してください。
 
-```
+```yml
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS prep
 
 COPY *.sln nuget.config Directory.Build.targets Packages.props \nuget\
@@ -100,20 +100,20 @@ RUN Invoke-Expression 'robocopy C:\temp C:\nuget\src /s /ndl /njh /njs *.csproj 
 
 新しいビルダーステージは、[.NET Framework SDKイメージ](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/) に基づいてコードのコンパイルとビルドプロセスを開始し、BUILD_CONFIGURATION ARGが宣言されます（これは [Docker Composeで設定](#docker-composeで設定する) された "debug "か "release "のどちらかになります）。
 
-```
+```yml
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS builder
 ARG BUILD_CONFIGURATION
 ```
 
 SHELL命令は、それ以降のすべての命令でデフォルトのシェルをPowerShell（デフォルトのcmdから）に切り替えます。これはWindowsのDockerfilesでよく見かける命令です。
 
-```
+```yml
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 ```
 
 次に、作業ディレクトリを作成し、先ほど収集したNuGetアーティファクトをコピーし、(最適化された)nugetリストアを行います。
 
-```
+```yml
 WORKDIR C:\build
 COPY --from=prep .\nuget .\
 RUN nuget restore
@@ -121,7 +121,7 @@ RUN nuget restore
 
 復元後、残りのソースコードをコピーして、変換ファイルを C:\outtransforms に集めています。
 
-```
+```yml
 COPY src\ .\src\
 RUN Invoke-Expression 'robocopy C:\build\src C:\out\transforms /s /ndl /njh /njs *.xdt'
 ```
@@ -142,7 +142,7 @@ RUN msbuild .\src\DockerExamples.XConnect\DockerExamples.XConnect.csproj /p:Conf
 
 ビルドが完了したら、最終イメージ用のビルド出力を収集します。このステージでは、Microsoft Nano Server イメージを使用します。このイメージはファイルを配信するだけで実行されることはないため、ベースイメージは最適化されたサイズで、他のランタイムイメージよりもはるかに小さいものが選択されます。
 
-```
+```yml
 FROM mcr.microsoft.com/windows/nanoserver:1809
 ```
 
@@ -152,7 +152,7 @@ FROM mcr.microsoft.com/windows/nanoserver:1809
 * \artifacts\transforms
 * \artifacts\xconnect
 
-```
+```yml
 WORKDIR C:\artifacts
 COPY --from=builder C:\out\website .\website\
 COPY --from=builder C:\out\transforms .\transforms\
@@ -217,7 +217,7 @@ solution:
 
 PowerShellプロンプトを開き、Composeファイルと同じフォルダ(例: *C:\sitecore\docker-examples\custom-images* )から以下を実行します。
 
-```
+```powershell
 docker-compose build solution
 ```
 
@@ -225,7 +225,7 @@ docker-compose build solution
 
 これでソリューションイメージのビルドプロセスが開始され、順調にいけばイメージが作成されます。
 
-```
+```powershell
 Building solution
 Step 1/21 : ARG BASE_IMAGE
 Step 2/21 : ARG BUILD_IMAGE
@@ -237,11 +237,11 @@ Successfully tagged docker-examples-solution:latest
 
 すべてのDockerイメージをリストアップすることで、イメージが作成されたことが確認できます。
 
-```
+```powershell
 docker images
 ```
 
-```
+```yml
 REPOSITORY                TAG     IMAGE ID      CREATED        SIZE
 docker-examples-solution  latest  9bb20b2ab6db  2 minutes ago  259MB
 ```
@@ -254,7 +254,7 @@ docker-examples-solution  latest  9bb20b2ab6db  2 minutes ago  259MB
 
 例えば、上記のソリューションイメージの例に対して対話型コマンドプロンプトを開くには (Nano Server には PowerShell がありません)、以下のようにします。
 
-```
+```powershell
 docker run -it --rm docker-examples-solution:latest
 ```
 

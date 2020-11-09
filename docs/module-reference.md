@@ -22,16 +22,15 @@ Sitecore のパブリックレジストリの使用方法については、Sitec
 
 #### mssql
 
-```
+```YML
 COPY --from=<spe_image> C:\module\db C:\spe_data
 RUN C:\DeployDatabases.ps1 -ResourcesDirectory C:\spe_data; `
     Remove-Item -Path C:\spe_data -Recurse -Force;
-
 ```
 
 #### cm
 
-```
+```YML
 COPY --from=<spe_image> C:\module\cm\content C:\inetpub\wwwroot
 ```
 
@@ -46,7 +45,7 @@ COPY --from=<spe_image> C:\module\cm\content C:\inetpub\wwwroot
 
 #### mssql
 
-```
+```YML
 COPY --from=<sxa_image> C:\module\db C:\sxa_data
 RUN C:\DeployDatabases.ps1 -ResourcesDirectory C:\sxa_data; `
     Remove-Item -Path C:\sxa_data -Recurse -Force;
@@ -54,7 +53,7 @@ RUN C:\DeployDatabases.ps1 -ResourcesDirectory C:\sxa_data; `
 
 #### solr
 
-````
+````YML
 COPY --from=<sxa_image> C:\module\solr C:\sxa_data
 RUN C:\Add-SolrCores.ps1 -SolrPath C:\solr -SolrSchemaPath C:\sxa_data\managed-schema -SolrCoreNames 'sitecore_sxa_master_index,sitecore_sxa_web_index'; `
     Remove-Item -Path C:\sxa_data -Recurse -Force;
@@ -62,7 +61,7 @@ RUN C:\Add-SolrCores.ps1 -SolrPath C:\solr -SolrSchemaPath C:\sxa_data\managed-s
 
 #### cd
 
-```
+```YML
 COPY --from=<sxa_image> C:\module\cd\content C:\inetpub\wwwroot
 COPY --from=<sxa_image> C:\module\tools C:\module\tools
 RUN C:\module\tools\Initialize-Content.ps1 -TargetPath C:\inetpub\wwwroot; `
@@ -71,7 +70,7 @@ RUN C:\module\tools\Initialize-Content.ps1 -TargetPath C:\inetpub\wwwroot; `
 
 #### cm
 
-```
+```YML
 COPY --from=<sxa_image> C:\module\cm\content C:\inetpub\wwwroot
 COPY --from=<sxa_image> C:\module\tools C:\module\tools
 RUN C:\module\tools\Initialize-Content.ps1 -TargetPath C:\inetpub\wwwroot; `
@@ -89,7 +88,7 @@ RUN C:\module\tools\Initialize-Content.ps1 -TargetPath C:\inetpub\wwwroot; `
 
 #### mssql
 
-```
+```YML
 COPY --from=<headless_services_image> C:\module\db C:\jss_data
 RUN C:\DeployDatabases.ps1 -ResourcesDirectory C:\jss_data; `
     Remove-Item -Path C:\jss_data -Recurse -Force;
@@ -97,7 +96,7 @@ RUN C:\DeployDatabases.ps1 -ResourcesDirectory C:\jss_data; `
 
 #### cd
 
-```
+```YML
 COPY --from=<headless_services_image> C:\module\cd\content C:\inetpub\wwwroot
 COPY --from=<headless_services_image> C:\module\tools C:\module\tools
 RUN C:\module\tools\Initialize-Content.ps1 -TargetPath C:\inetpub\wwwroot; `
@@ -106,7 +105,7 @@ RUN C:\module\tools\Initialize-Content.ps1 -TargetPath C:\inetpub\wwwroot; `
 
 #### cm
 
-```
+```YML
 COPY --from=<headless_services_image> C:\module\cm\content C:\inetpub\wwwroot
 COPY --from=<headless_services_image> C:\module\tools C:\module\tools
 RUN C:\module\tools\Initialize-Content.ps1 -TargetPath C:\inetpub\wwwroot; `
@@ -124,6 +123,6 @@ RUN C:\module\tools\Initialize-Content.ps1 -TargetPath C:\inetpub\wwwroot; `
 
 #### cm
 
-```
+```YML
 COPY --from=<management_services_image> C:\module\cm\content C:\inetpub\wwwroot
 ```

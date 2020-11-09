@@ -33,7 +33,7 @@ Sitecore 10でリリースされたSitecore CLIは、リモートのSitecoreイ�
 
 Sitecore TDSでは、Dockerビルドやクラウドビルドの際に[環境変数のライセンス](dockerfile-best-practices.md#team-development-for-sitecore-で構築)が必要になります。ソリューションビルドのDockerfileの中で、コードのコンパイルとビルドの段階（例ではビルダー）の開始時に、これらのARGを宣言してください。
 
-```
+```YML
 ARG TDS_Owner
 ARG TDS_Key
 ```
@@ -42,7 +42,7 @@ ARG TDS_Key
 
 これらの値は、docker-compose.override.yml ファイルのソリューションサービス用に設定されます。例えば、以下のようになります。
 
-```
+```YML
 solution:
   image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-solution:${VERSION:-latest}
   build:
@@ -59,7 +59,7 @@ TDS_OWNERとTDS_KEYの値は、[環境ファイル](https://docs.docker.com/comp
 
 [ソリューションビルドのDockerfile](build-solution.md#dockerfile-をビルド)を続けると、msbuild命令を単純化することができ、代わりにTDSプロジェクトで設定されたビルド出力に依存することができます。
 
-```
+```YML
 RUN msbuild /p:Configuration=Release
 ```
 
@@ -76,7 +76,7 @@ RUN msbuild /p:Configuration=Release
 
 ということで、最終的な指示が調整されています。
 
-```
+```YML
 WORKDIR C:\artifacts
 COPY --from=builder \build\TdsGeneratedPackages\Release .\website\
 COPY --from=builder \build\TdsGeneratedPackages\WebDeploy_Release .\packages\
@@ -93,7 +93,7 @@ COPY --from=builder C:\out\transforms .\transforms\
 
 Sitecore TDSがサイト起動時にアイテムパッケージをインストールできるようにします。これは[TDSの組み込み機能](https://hedgehogdevelopment.github.io/tds/chapter7.html#deployment-process)を利用しています。ただし、このイメージを使用してコンテナが作成されるたびに実行されることに注意してください。
 
-```
+```YML
 COPY --from=solution \artifacts\packages\ \temp\
 RUN Get-ChildItem -Path 'C:\\temp\\*.wdp.zip' | % { Expand-Archive -Path $_.FullName -DestinationPath 'C:\\temp' -Force; }; `
     Move-Item -Path 'C:\\temp\\Content\\Website\\Bin\*' -Destination .\bin -Force; `
@@ -107,14 +107,14 @@ RUN Get-ChildItem -Path 'C:\\temp\\*.wdp.zip' | % { Expand-Archive -Path $_.Full
 
 ツールイメージの `Deploy-TdsWdpPackages.ps1` スクリプトを使用します。パッケージと一緒にコピーしてください。
 
-```
+```YML
 COPY --from=tooling \tools\scripts\Deploy-TdsWdpPackages.ps1 \install\Deploy-TdsWdpPackages.ps1
 COPY --from=solution \artifacts\packages\ \install\packages\
 ```
 
 そして、以下のスクリプトでコンテナ上でオンデマンドでDeploy-TdsWdpPackages.ps1を起動します。
 
-```
+```YML
 docker exec <container> powershell -command "C:\install\Deploy-TdsWdpPackages.ps1"
 
 ```
@@ -131,7 +131,7 @@ docker exec <container> powershell -command "C:\install\Deploy-TdsWdpPackages.ps
 
 Unicornを使用する場合、シリアライズされたアイテムは、通常、Sitecoreのソリューションソース内に配置され、[Sitecore Helix のプラクティス](https://helix.sitecore.net/)に従う可能性があります。ソリューションのビルド中に、これらのシリアル化されたアイテムをすべてコピーすることができますが、ディレクトリ構造を保持することが重要です。これを実現するための簡単なオプションとして、Robocopyがあります。
 
-```
+```YML
 # ディレクトリ構造を保持したまま、シリアル化されたアイテムをコピー
 RUN Invoke-Expression 'robocopy C:\build\src C:\out\items /s /ndl /njh /njs *.yml'
 
@@ -152,7 +152,7 @@ CM [ビルドコンテキスト](https://docs.docker.com/develop/develop-images/
 
 この場合の `sync.ps1` スクリプトには `Sync-Unicorn` の標準的な呼び出しが含まれており、環境変数を使用して Unicorn の共有シークレットを入力する必要があります。
 
-```
+```YML
 $ScriptPath = Split-Path $MyInvocation.MyCommand.Path
 Import-Module $ScriptPath\Unicorn.psm1
 Sync-Unicorn -ControlPanelUrl 'http://localhost/unicorn.aspx' -SharedSecret $env:UNICORN_SHARED_SECRET
@@ -160,7 +160,7 @@ Sync-Unicorn -ControlPanelUrl 'http://localhost/unicorn.aspx' -SharedSecret $env
 
 次に、CMのDockerfileで、このフォルダとシリアル化アイテムの成果物をコピーし、後でUnicornを設定するために使用できる環境変数を設定します。
 
-```
+```YML
 # シリアル化されたアイテムのデフォルトの場所を設定する
 # この値はユニコーンの設定で使用されます。
 ENV ITEM_SYNC_LOCATION c:\items
@@ -174,13 +174,13 @@ COPY .\unicorn \unicorn\
 
 Unicorn同期に使用されるベースファイルシステムのパスは、通常、Sitecoreの設定で`sourceFolder`という`sc.variable`を使用して設定されます。この値は、上記で定義した環境変数から`Dockerfile`に入力することができます。
 
-```
+```xml
 <sc.variable name="sourceFolder" value="$(env:ITEM_SYNC_LOCATION)" />
 ```
 
 Unicornの共有シークレットは環境変数からも入力できるので、上記の`sync.ps1`で行ったのと同じ環境変数を使用することができます。
 
-```
+```xml
 <authenticationProvider type="Unicorn.ControlPanel.Security.ChapAuthenticationProvider, Unicorn">
   <SharedSecret>$(env:UNICORN_SHARED_SECRET)</SharedSecret>
 </authenticationProvider>
@@ -188,14 +188,14 @@ Unicornの共有シークレットは環境変数からも入力できるので�
 
 そして、この環境変数を `docker-compose.override.yml` と `.env` に定義します。
 
-```
+```yml
 cm:
     [...]
     environment:
       UNICORN_SHARED_SECRET: ${UNICORN_SHARED_SECRET}
 ```
 
-```
+```yml
 UNICORN_SHARED_SECRET=your-secret-here
 ```
 

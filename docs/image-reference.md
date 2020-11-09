@@ -1,7 +1,7 @@
 ---
 id: image-reference
-title: Sitecoreイメージリファレンス
-sidebar_label: Sitecoreイメージリファレンス
+title: Sitecore イメージリファレンス
+sidebar_label: Sitecore イメージリファレンス
 ---
 
 このページでは、Sitecore Container Registry (SCR)、scr.sitecore.comで利用可能なイメージの詳細情報と、カスタムソリューションでの使用方法について説明します。
@@ -147,7 +147,7 @@ Sitecoreのイメージショートタグ（例：`10.0.0-ltsc2019`）を使用�
 
 推奨されているDocker Composeの設定では、オーバーライドを除いて、docker-compose pullコマンドを使ってほとんどのことができるはずです。
 
-```
+```powershell
 docker-compose -f docker-compose.yml pull
 ```
 

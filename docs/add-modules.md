@@ -26,9 +26,8 @@ sidebar_label: Sitecoreモジュールの追加
 
 PowerShell 管理者プロンプトを開き、custom-images フォルダ（例：C:\sitecoredocker-examples\custom-images）に移動します。以下のコマンドを実行し、-LicenseXmlPathをSitecoreライセンスファイルの場所に置き換えます。
 
-```
+```powershell
 .\init.ps1 -LicenseXmlPath C:\License\license.xml
-
 ```
 
 ## Sitecoreモジュールのアセットイメージを理解する
@@ -66,7 +65,7 @@ cmサービス用の [Sitececore ランタイム Dockerfile](build-sitecore-imag
 
 SPEとSXAのモジュールのアセットイメージは、最初にARG([Docker Compose の設定](#docker-compose-の設定))で持ち込まれ、後で使うために名前付きビルドステージ speとsxaとして起動されているのがわかります。
 
-```
+```YML
 ARG SXA_IMAGE
 ARG SPE_IMAGE
 [...]
@@ -76,7 +75,7 @@ FROM ${SXA_IMAGE} as sxa
 
 これで、[SPE](module-reference.md#sitecore-powershell-extensions-spe) と [SXA](module-reference.md#sitecore-experience-accelerator-sxa) の両方に必要なcm Dockerfile命令が、`WORKDIR`命令のすぐ後に追加されているのがわかります。
 
-```
+```YML
 COPY --from=spe \module\cm\content .\
 
 COPY --from=sxa \module\cm\content .\
@@ -98,7 +97,7 @@ RUN C:\module\tools\Initialize-Content.ps1 -TargetPath .\; `
 
 同じ `ARG` とビルドステージが宣言され、[SPE](module-reference.md#sitecore-powershell-extensions-spe)と[SXA](module-reference.md#sitecore-experience-accelerator-sxa)の両方に必要なmssql Dockerfile命令が追加されているのがわかると思います。
 
-```
+```YML
 COPY --from=spe \module\db \spe_data
 RUN C:\DeployDatabases.ps1 -ResourcesDirectory C:\spe_data; `
     Remove-Item -Path C:\spe_data -Recurse -Force;
@@ -114,7 +113,7 @@ RUN C:\DeployDatabases.ps1 -ResourcesDirectory C:\sxa_data; `
 
 同じ`ARG`とビルドステージが宣言され、必要なsolr Dockerfile命令が追加されています。この場合は[SXA](module-reference.md#sitecore-experience-accelerator-sxa)に限ります。
 
-```
+```YML
 COPY --from=sxa \module\solr \sxa_data
 RUN C:\Add-SolrCores.ps1 -SolrPath C:\solr -SolrSchemaPath C:\sxa_data\managed-schema -SolrCoreNames 'sitecore_sxa_master_index,sitecore_sxa_web_index'; `
     Remove-Item -Path C:\sxa_data -Recurse -Force;
@@ -130,7 +129,7 @@ custom-imagesフォルダのルートにある`docker-compose.override.yml`フ�
 
 どのように設定されているのか、cmサービスを見てみましょう。
 
-```
+```YML
 cm:
   image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-xp0-cm:${VERSION:-latest}
   build:
@@ -156,7 +155,7 @@ cm:
 
 PowerShellプロンプトを開き、custom-imagesフォルダ（例：C:\sitecore\docker-examples\custom-images ）に移動します。Docker Compose `up`コマンドを使ってDocker Examplesを実行します。
 
-```
+```powershell
 docker-compose up -d
 ```
 
