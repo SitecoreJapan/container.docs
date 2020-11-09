@@ -31,7 +31,7 @@ sidebar_label: 最初のSitecoreインスタンスの実行
 PowerShell プロンプトを開き、get-started フォルダに移動し、内容を確認します。
 
 ```powershell
-cd C:\sitecoredocker-examples-getting-started
+cd C:\sitecore\docker-examples\getting-started
 ls
 ```
 
@@ -187,7 +187,7 @@ Sitecore のライセンスファイルは非常に大きいので、すべて�
 
 #### traefikフォルダ
 
-*getting-startedtraefik* フォルダに移動し、内容を見てみましょう。以下のようなものがあります。
+*getting-started\traefik* フォルダに移動し、内容を見てみましょう。以下のようなものがあります。
 
 * **certs** - 生成された証明書を置く必要がある空のフォルダ。
 * ***config/dynamic/certs_config.yaml** - Traefik コンテナで使用する Traefik 設定ファイル。
@@ -226,7 +226,7 @@ tls:
 
 > Traefik での TLS 設定の詳細については、[Traefik のドキュメント](https://docs.traefik.io/https/tls/) を参照してください。
 
-これは、certs フォルダ内の証明書ファイルを参照して、ボリュームマウントされたパス (`C:\\etctraefik`) も使用していることがわかります。これらは次のステップで作成する必要がある証明書です。
+これは、certs フォルダ内の証明書ファイルを参照して、ボリュームマウントされたパス (`C:\etc\traefik`) も使用していることがわかります。これらは次のステップで作成する必要がある証明書です。
 
 これらの証明書を作成するには、[mkcert](https://github.com/FiloSottile/mkcert) ユーティリティを使うことをお勧めします。
 
@@ -246,7 +246,7 @@ mkcert -install
 
 #### 証明書の生成
 
-mkcertがインストールされたら、get-startedフォルダ（例：*C:\sitecoredocker-examplesgetting-started*）から以下のコマンドを実行して、必要な証明書を生成します。
+mkcertがインストールされたら、get-startedフォルダ（例：*C:\sitecore\docker-examples\getting-started*）から以下のコマンドを実行して、必要な証明書を生成します。
 
 ```powershell
 mkcert -cert-file traefik\certs\xp0cm.localhost.crt -key-file traefik\certs\xp0cm.localhost.key "xp0cm.localhost"
@@ -276,7 +276,7 @@ Add-HostsEntry "xp0id.localhost"
 ## Sitecoreの起動
 
 準備が完了したら、Docker Composeコマンド1つでSitecoreインスタンスを起動します。
-Composeファイルと同じフォルダ（例：*C:\sitecoredocker-examplesgetgetting-started*）から以下を実行します。
+Composeファイルと同じフォルダ（例：*C:\sitecore\docker-examples\getting-started*）から以下を実行します。
 
 ```powershell
 docker-compose up -d
